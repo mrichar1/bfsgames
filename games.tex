@@ -1,0 +1,89 @@
+%Template for a game:
+%(Note \index is in form of {category!game} e.g {Tig!Peg Tig}
+%(Replace xx with Recipe Name/Index info)
+
+% \begin{minipage}{\textwidth} - begin a 'game block'
+% \index{Category!Game}\index{Category2!Game}\section[Title]{\begin{center}Title\end{center}}
+% Equipment: \\*
+% Players: \\*
+% \\*
+% Game Instructions
+% \end{minipage}    \vfill - end the 'game block'
+
+
+\documentclass[12pt,a4paper,titlepage,twoside,openright]{book}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{fullpage}
+\author{edited by Matthew Richardson}
+\title{The Beltane Bumper Book of Games}
+\date{}
+
+\makeatletter
+\newcommand{\game}[2]{
+\@for \xx:=#2\do{
+\index{\xx!{#1}}
+}
+\section[#1]{#1}
+\setlength{\parindent}{1.1em}
+\textbf{Categories:}\indent #2\\*
+\setlength{\parindent}{0em}
+}
+\makeatother
+
+
+\makeatletter
+% Comma-separated list of equipment needed
+\newcommand{\equip}[1]{
+\setlength{\parindent}{2.15em}
+\textbf{Equipment:}
+\@for \xy:=#1\do{
+\xy\\*\indent\indent\indent
+}
+\setlength{\parindent}{0em}
+}
+\makeatother
+
+\newcommand{\play}[1]{
+\setlength{\parindent}{2.5em}
+\textbf{Players:\indent} {#1}\\*
+\setlength{\parindent}{0em}
+}
+
+\makeindex
+\begin{document}
+
+\setcounter{secnumdepth}{-1}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{0.15cm}
+
+\maketitle
+
+\tableofcontents
+
+
+\chapter[Games]{\begin{center}Games\end{center}}
+\pagebreak
+
+% Include Game Files here
+
+
+\input{backtobackintro}
+\input{footlighttheatre}
+\input{hospitaltig}
+\input{hugtig}
+\input{namegame}
+\input{pegtig}
+\input{reversetig}
+\input{snakeinthegrass}
+\input{tig}
+\input{timebombtig}
+\input{zombiename}
+
+% Output the index at the end.
+\printindex
+
+\end{document}
