@@ -1,0 +1,15 @@
+\input{backtobackintro}
+\input{chaintig}
+\input{dragontig}
+\input{footlighttheatre}
+\input{hellomynameisjoe}
+\input{hospitaltig}
+\input{hugtig}
+\input{monkeysong}
+\input{namegame}
+\input{pegtig}
+\input{reversetig}
+\input{snakeinthegrass}
+\input{tig}
+\input{timebombtig}
+\input{zombiename}

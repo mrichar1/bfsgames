@@ -2,12 +2,14 @@
 %(Note \index is in form of {category!game} e.g {Tig!Peg Tig}
 %(Replace xx with Recipe Name/Index info)
 
-% \begin{minipage}{\textwidth} - begin a 'game block'
-% \index{Category!Game}\index{Category2!Game}\section[Title]{\begin{center}Title\end{center}}
-% Equipment: \\*
-% Players: \\*
+% \begin{minipage}{\textwidth}
+% \game{Eating Food}{Meal}{Tig}
+% \equip{knife, fork, spoon}
+% \play{1 or more players}
+% \aka{Lunch}
 % \\*
 % Game Instructions
+% \refer{Breakfast}
 % \end{minipage}    \vfill - end the 'game block'
 
 
@@ -16,17 +18,27 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-\usepackage{makeidx}
+\usepackage{multind}
 \usepackage{fullpage}
+\usepackage{verbatim}
 \author{edited by Matthew Richardson}
 \title{The Beltane Bumper Book of Games}
 \date{}
 
+%Setup (empty) gamename macro
+\newcommand{\gamename}{}
+
+% REFER macro ('See also [game]')
+\newcommand{\refer}[1]{\\*See also: \textbf{#1} (p.\pageref{#1})}
+
+% GAME macro ({game name}{category}{category...}
 \makeatletter
 \newcommand{\game}[2]{
+\renewcommand{\gamename}{#1}
 \@for \xx:=#2\do{
-\index{\xx!{#1}}
+\index{Index}{\xx!{#1}}
 }
+\label{#1}
 \section[#1]{#1}
 \setlength{\parindent}{1.1em}
 \textbf{Categories:}\indent #2\\*
@@ -35,8 +47,18 @@
 \makeatother
 
 
+% AKA macro (comma-separated list of alternative names)
 \makeatletter
-% Comma-separated list of equipment needed
+\newcommand{\aka}[1]{
+\@for \xy:=#1\do{
+\index{Alternatives}{\xy!\gamename}
+\textbf{Also Known As:} \xy\\*
+}
+}
+\makeatother
+
+% EQUIP macro (Comma-separated list of equipment needed)
+\makeatletter
 \newcommand{\equip}[1]{
 \setlength{\parindent}{2.15em}
 \textbf{Equipment:}
@@ -47,43 +69,34 @@
 }
 \makeatother
 
+% PLAY macro
 \newcommand{\play}[1]{
 \setlength{\parindent}{2.5em}
 \textbf{Players:\indent} {#1}\\*
 \setlength{\parindent}{0em}
 }
 
-\makeindex
+\makeindex{Alternatives}
+\makeindex{Index}
+
 \begin{document}
 
 \setcounter{secnumdepth}{-1}
 \setlength{\parindent}{0cm}
-\setlength{\parskip}{0.15cm}
+\setlength{\parskip}{1.2em}
 
 \maketitle
 
 \tableofcontents
 
-
 \chapter[Games]{\begin{center}Games\end{center}}
 \pagebreak
 
 % Include Game Files here
-
-
-\input{backtobackintro}
-\input{footlighttheatre}
-\input{hospitaltig}
-\input{hugtig}
-\input{namegame}
-\input{pegtig}
-\input{reversetig}
-\input{snakeinthegrass}
-\input{tig}
-\input{timebombtig}
-\input{zombiename}
+\input{inputs}
 
 % Output the index at the end.
-\printindex
+\printindex{Alternatives}{Alternative Game Names}
+\printindex{Index}{Categories}
 
 \end{document}
