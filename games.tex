@@ -18,7 +18,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-\usepackage{multind}
+\usepackage[splitindex]{imakeidx}
 \usepackage{fullpage}
 \usepackage{verbatim}
 \usepackage{cclicenses}
@@ -45,7 +45,7 @@
 \newcommand{\game}[2]{
 \renewcommand{\gamename}{#1}
 \@for \xx:=#2\do{
-\index{Index}{\xx!{#1}}
+\index{\xx!{#1}}
 }
 \label{#1}
 \section[#1]{#1}
@@ -60,7 +60,7 @@
 \makeatletter
 \newcommand{\aka}[1]{
 \@for \xy:=#1\do{
-\index{Alternatives}{\xy!\gamename}
+\index[alt]{\xy!\gamename}
 \textbf{Also Known As:} \xy\\*
 }
 }
@@ -80,15 +80,15 @@
 
 % PLAY macro
 \newcommand{\play}[1]{
-\index{Players}{#1!\gamename}
+\index[play]{#1!\gamename}
 \setlength{\parindent}{2.5em}
 \textbf{Players:\indent} {#1}\\*
 \setlength{\parindent}{0em}
 }
 
-\makeindex{Alternatives}
-\makeindex{Players}
-\makeindex{Index}
+\makeindex
+\makeindex[name=alt,title=Alternatives]
+\makeindex[name=play,title=Number of Players]
 
 \begin{document}
 \input{title}
@@ -118,8 +118,8 @@ We hope you enjoy reading and using this book, and that it provides both enterta
 \input{inputs}
 
 % Output the index at the end.
-\printindex{Alternatives}{Alternative Game Names}
-\printindex{Players}{Players}
-\printindex{Index}{Categories}
+\printindex[alt]
+\printindex[play]
+\printindex
 
 \end{document}

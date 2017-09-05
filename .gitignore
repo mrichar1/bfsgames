@@ -1,0 +1,8 @@
+inputs.tex
+version.tex
+*.idx
+*.ilg
+*.log
+*.ind
+*.toc
+*.aux
